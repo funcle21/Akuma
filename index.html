@@ -5,27 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japhet Ondicho Akuma | Architect</title>
     <style>
+        /* CSS Custom Properties - Design System */
+        :root {
+            /* Monochrome Palette */
+            --color-black: #0a0a0a;
+            --color-gray-900: #1a1a1a;
+            --color-gray-800: #2d2d2d;
+            --color-gray-700: #404040;
+            --color-gray-600: #555555;
+            --color-gray-500: #6b6b6b;
+            --color-gray-400: #999999;
+            --color-gray-300: #c5c5c5;
+            --color-gray-200: #e5e5e5;
+            --color-gray-100: #f5f5f5;
+            --color-white: #ffffff;
+            
+            /* Accent - Deep Architectural Blue */
+            --color-accent: #2c5f7c;
+            --color-accent-light: #3a7a9e;
+            
+            /* Spacing System (8px base unit) */
+            --space-xs: 0.5rem;    /* 8px */
+            --space-sm: 1rem;      /* 16px */
+            --space-md: 1.5rem;    /* 24px */
+            --space-lg: 2rem;      /* 32px */
+            --space-xl: 3rem;      /* 48px */
+            --space-2xl: 4rem;     /* 64px */
+            --space-3xl: 6rem;     /* 96px */
+            --space-4xl: 8rem;     /* 128px */
+            --space-5xl: 12rem;    /* 192px */
+            
+            /* Typography Scale */
+            --font-size-xs: 0.875rem;   /* 14px */
+            --font-size-sm: 1rem;       /* 16px */
+            --font-size-base: 1.125rem; /* 18px */
+            --font-size-lg: 1.25rem;    /* 20px */
+            --font-size-xl: 1.5rem;     /* 24px */
+            --font-size-2xl: 2rem;      /* 32px */
+            --font-size-3xl: 2.5rem;    /* 40px */
+            --font-size-4xl: 3.5rem;    /* 56px */
+            --font-size-5xl: 4.5rem;    /* 72px */
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
+        html {
+            scroll-behavior: smooth;
         }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--color-gray-900);
+            background: var(--color-white);
+            font-size: var(--font-size-base);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Hero Section */
         .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            background: var(--color-gray-900);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            padding: var(--space-xl) var(--space-lg);
         }
 
         .hero::before {
@@ -33,285 +89,434 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="100" x="50" fill="%23ffffff" opacity="0.03"/><rect width="100" height="1" y="50" fill="%23ffffff" opacity="0.03"/></svg>');
-            opacity: 0.5;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 99px, var(--color-gray-800) 99px, var(--color-gray-800) 100px),
+                repeating-linear-gradient(90deg, transparent, transparent 99px, var(--color-gray-800) 99px, var(--color-gray-800) 100px);
+            opacity: 0.3;
+            pointer-events: none;
         }
 
         .hero-content {
             text-align: center;
-            color: #fff;
+            color: var(--color-white);
             z-index: 1;
-            padding: 0 20px;
+            max-width: 900px;
+            opacity: 0;
+            animation: fadeIn var(--transition-slow) ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
+            font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
+            font-weight: 200;
+            margin-bottom: var(--space-md);
+            letter-spacing: 0.05em;
+            line-height: 1.1;
         }
 
         .hero .subtitle {
-            font-size: 1.5rem;
+            font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-xl));
             font-weight: 300;
-            margin-bottom: 2rem;
-            color: #c5c5c5;
+            margin-bottom: var(--space-xl);
+            color: var(--color-gray-300);
+            letter-spacing: 0.03em;
         }
 
         .hero .tagline {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            font-size: var(--font-size-base);
+            max-width: 650px;
+            margin: 0 auto var(--space-2xl);
             line-height: 1.8;
-            color: #a0a0a0;
+            color: var(--color-gray-400);
         }
 
         .cta-button {
             display: inline-block;
-            padding: 15px 40px;
+            padding: var(--space-md) var(--space-2xl);
             background: transparent;
-            color: #fff;
+            color: var(--color-white);
             text-decoration: none;
-            border: 2px solid #fff;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            letter-spacing: 1px;
+            border: 1px solid var(--color-white);
+            transition: all var(--transition-base);
+            font-size: var(--font-size-xs);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
         .cta-button:hover {
-            background: #fff;
-            color: #1a1a1a;
+            background: var(--color-white);
+            color: var(--color-gray-900);
+            transform: translateY(-2px);
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.98);
-            padding: 20px 5%;
+            backdrop-filter: blur(10px);
+            padding: var(--space-lg) 5%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 0 var(--color-gray-200);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: padding var(--transition-base);
+        }
+
+        nav.scrolled {
+            padding: var(--space-md) 5%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-size: var(--font-size-xl);
+            font-weight: 300;
+            color: var(--color-black);
+            letter-spacing: 0.1em;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 30px;
+            gap: var(--space-xl);
         }
 
         nav a {
             text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
+            color: var(--color-gray-700);
+            font-weight: 400;
+            font-size: var(--font-size-xs);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color var(--transition-base);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transition: width var(--transition-base);
         }
 
         nav a:hover {
-            color: #666;
+            color: var(--color-black);
         }
 
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styles */
         section {
-            padding: 100px 5%;
+            padding: var(--space-5xl) 5%;
             max-width: 1400px;
             margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--transition-slow), transform var(--transition-slow);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2 {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            font-weight: 300;
+            font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+            margin-bottom: var(--space-3xl);
+            font-weight: 200;
             text-align: center;
-            position: relative;
-            padding-bottom: 20px;
+            letter-spacing: 0.02em;
+            color: var(--color-black);
         }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: #1a1a1a;
+        h3 {
+            font-size: var(--font-size-2xl);
+            font-weight: 300;
+            letter-spacing: 0.01em;
+            color: var(--color-black);
         }
 
+        /* About Section */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: var(--space-4xl);
             align-items: center;
-            margin-top: 60px;
+            margin-top: var(--space-3xl);
         }
 
         .about-image {
             width: 100%;
-            height: 500px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            aspect-ratio: 4/5;
+            background: var(--color-gray-100);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 5rem;
-            font-weight: 700;
+            color: var(--color-gray-400);
+            font-size: var(--font-size-5xl);
+            font-weight: 200;
+            border: 1px solid var(--color-gray-200);
+        }
+
+        .about-content {
+            padding: var(--space-xl) 0;
         }
 
         .about-content h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 400;
+            margin-bottom: var(--space-xl);
         }
 
         .about-content p {
-            margin-bottom: 1.5rem;
+            margin-bottom: var(--space-lg);
             line-height: 1.8;
-            color: #555;
-            font-size: 1.1rem;
+            color: var(--color-gray-600);
+            font-size: var(--font-size-base);
         }
 
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-2xl);
+            margin-top: var(--space-3xl);
+            padding: var(--space-3xl) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-lg);
+        }
+
+        .stat-number {
+            font-size: var(--font-size-4xl);
+            font-weight: 200;
+            color: var(--color-accent);
+            margin-bottom: var(--space-sm);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+
+        /* Journey Section */
         .journey {
-            background: #f8f8f8;
+            background: var(--color-gray-100);
         }
 
         .journey-content {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .journey-item {
-            margin-bottom: 40px;
-            padding-left: 30px;
-            border-left: 3px solid #1a1a1a;
+            margin-bottom: var(--space-3xl);
+            padding-left: var(--space-xl);
+            border-left: 2px solid var(--color-accent);
+            transition: border-color var(--transition-base);
+        }
+
+        .journey-item:hover {
+            border-left-color: var(--color-accent-light);
+        }
+
+        .journey-item:last-child {
+            margin-bottom: 0;
         }
 
         .journey-item h4 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-weight: 600;
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-sm);
+            font-weight: 400;
+            color: var(--color-black);
         }
 
         .journey-item .year {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+            color: var(--color-accent);
+            font-size: var(--font-size-xs);
+            margin-bottom: var(--space-md);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
         }
 
         .journey-item p {
-            color: #555;
+            color: var(--color-gray-600);
             line-height: 1.8;
+            font-size: var(--font-size-base);
         }
 
+        /* Philosophy Section */
         .philosophy {
-            background: #1a1a1a;
-            color: #fff;
+            background: var(--color-gray-900);
+            color: var(--color-white);
         }
 
-        .philosophy h2::after {
-            background: #fff;
+        .philosophy h2 {
+            color: var(--color-white);
         }
 
         .philosophy-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-2xl);
+            margin-top: var(--space-3xl);
         }
 
         .philosophy-card {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s;
+            padding: var(--space-2xl);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all var(--transition-base);
         }
 
         .philosophy-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.08);
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .philosophy-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            font-weight: 500;
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-lg);
+            font-weight: 300;
+            color: var(--color-white);
         }
 
         .philosophy-card p {
             line-height: 1.8;
-            color: #c5c5c5;
+            color: var(--color-gray-300);
+            font-size: var(--font-size-base);
         }
 
+        /* Projects Section - Case Study Approach */
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5xl);
+            margin-top: var(--space-3xl);
         }
 
         .project-card {
-            background: #f8f8f8;
-            overflow: hidden;
-            transition: transform 0.3s;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+            background: var(--color-white);
         }
 
-        .project-card:hover {
-            transform: scale(1.02);
+        .project-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .project-card:nth-child(even) > * {
+            direction: ltr;
         }
 
         .project-image {
             width: 100%;
-            height: 350px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            aspect-ratio: 4/3;
+            background: var(--color-gray-200);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 3rem;
-            font-weight: 700;
+            color: var(--color-gray-400);
+            font-size: var(--font-size-4xl);
+            font-weight: 200;
+            border: 1px solid var(--color-gray-200);
+            transition: transform var(--transition-base);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.02);
         }
 
         .project-info {
-            padding: 30px;
-        }
-
-        .project-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-weight: 500;
+            padding: var(--space-xl);
         }
 
         .project-meta {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
         }
 
-        .project-info p {
+        .project-meta span {
+            color: var(--color-accent);
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .project-meta span:not(:last-child)::after {
+            content: '•';
+            margin-left: var(--space-md);
+            color: var(--color-gray-400);
+        }
+
+        .project-info h3 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-lg);
+            font-weight: 300;
+        }
+
+        .project-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .project-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-section h4 {
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+        }
+
+        .project-section p {
             line-height: 1.8;
-            color: #555;
+            color: var(--color-gray-600);
+            font-size: var(--font-size-base);
         }
 
+        /* Contact Section */
         .contact {
-            background: #f8f8f8;
-        }
-
-        .contact h2 {
-            text-align: center;
+            background: var(--color-gray-100);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-top: 60px;
+            gap: var(--space-4xl);
+            margin-top: var(--space-3xl);
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
@@ -319,115 +524,212 @@
 
         .contact-info-left h3,
         .contact-form-right h3 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            font-weight: 500;
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-2xl);
+            font-weight: 300;
         }
 
         .contact-item {
-            margin-bottom: 30px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
         }
 
         .contact-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: var(--font-size-xs);
+            margin-bottom: var(--space-sm);
             font-weight: 500;
-            color: #1a1a1a;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .contact-item p {
-            color: #555;
-            font-size: 1.1rem;
+            color: var(--color-gray-700);
+            font-size: var(--font-size-base);
             line-height: 1.6;
         }
 
         .contact-item a {
-            color: #1a1a1a;
+            color: var(--color-gray-900);
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
+            font-size: var(--font-size-base);
+            transition: color var(--transition-base);
+            border-bottom: 1px solid transparent;
         }
 
         .contact-item a:hover {
-            color: #666;
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: var(--font-size-xs);
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            background: #fff;
-            font-size: 1rem;
+            padding: var(--space-md);
+            border: 1px solid var(--color-gray-300);
+            background: var(--color-white);
+            font-size: var(--font-size-base);
             font-family: inherit;
-            transition: border-color 0.3s;
+            transition: border-color var(--transition-base), box-shadow var(--transition-base);
+            color: var(--color-gray-900);
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #1a1a1a;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(44, 95, 124, 0.1);
         }
 
         .form-group textarea {
             resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #d32f2f;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: var(--font-size-xs);
+            margin-top: var(--space-xs);
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 15px;
-            background: #1a1a1a;
-            color: #fff;
+            padding: var(--space-md);
+            background: var(--color-gray-900);
+            color: var(--color-white);
             border: none;
-            font-size: 1.1rem;
+            font-size: var(--font-size-xs);
             cursor: pointer;
-            transition: background 0.3s;
-            letter-spacing: 1px;
+            transition: all var(--transition-base);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 500;
         }
 
         .submit-btn:hover {
-            background: #333;
+            background: var(--color-black);
+            transform: translateY(-2px);
         }
 
+        .submit-btn:disabled {
+            background: var(--color-gray-400);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Footer */
         footer {
-            background: #1a1a1a;
-            color: #fff;
+            background: var(--color-gray-900);
+            color: var(--color-gray-400);
             text-align: center;
-            padding: 40px 5%;
+            padding: var(--space-2xl) 5%;
+            font-size: var(--font-size-xs);
+            letter-spacing: 0.05em;
+        }
+
+        footer p {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            :root {
+                --space-5xl: 8rem;
+                --space-4xl: 6rem;
+                --space-3xl: 4rem;
+            }
+
+            .project-card {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .project-card:nth-child(even) {
+                direction: ltr;
+            }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            :root {
+                --space-5xl: 6rem;
+                --space-4xl: 4rem;
+                --space-3xl: 3rem;
             }
 
-            .hero .subtitle {
-                font-size: 1.2rem;
+            nav {
+                padding: var(--space-md) 5%;
             }
 
-            h2 {
-                font-size: 2rem;
+            nav ul {
+                gap: var(--space-md);
+            }
+
+            nav a {
+                font-size: 0.75rem;
             }
 
             .about-grid,
-            .projects-grid,
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: var(--space-3xl);
             }
 
             .philosophy-grid {
                 grid-template-columns: 1fr;
             }
 
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --space-5xl: 4rem;
+                --space-4xl: 3rem;
+            }
+
+            .hero {
+                padding: var(--space-xl) var(--space-md);
+            }
+
             nav ul {
-                gap: 15px;
-                font-size: 0.9rem;
+                gap: var(--space-sm);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -439,6 +741,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#journey">Journey</a></li>
             <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#expertise">Expertise</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -462,6 +765,24 @@
                 <p>Born and raised in Kisii, my journey into architecture began with a simple fascination: how spaces shape human experiences. From the rolling hills of my hometown to the classrooms of Kapsabet High School, I observed how environment influences behavior, culture, and opportunity.</p>
                 <p>This curiosity led me to the Technical University of Kenya (TUK), where I pursued a degree in Architecture. There, I didn't just learn to design buildings—I learned to solve problems, to listen to communities, and to envision futures where structures serve as catalysts for transformation.</p>
                 <p>Upon graduation, I founded Archabitive, driven by a singular mission: to prove that African architects can compete and excel on the global stage while remaining deeply rooted in local context and community needs.</p>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Projects Completed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Team Members</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Countries Served</span>
             </div>
         </div>
     </section>
@@ -510,39 +831,129 @@
         </div>
     </section>
 
+    <section id="expertise">
+        <h2>Expertise & Services</h2>
+        <div class="philosophy-grid">
+            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
+                <h3 style="color: var(--color-black);">Residential Architecture</h3>
+                <p style="color: var(--color-gray-600);">Custom homes and residential developments that balance aesthetic vision with practical living needs. From concept to completion, creating spaces that feel like home.</p>
+            </div>
+            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
+                <h3 style="color: var(--color-black);">Commercial Design</h3>
+                <p style="color: var(--color-gray-600);">Office buildings, retail spaces, and mixed-use developments designed to enhance user experience while maximizing functionality and return on investment.</p>
+            </div>
+            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
+                <h3 style="color: var(--color-black);">Institutional Projects</h3>
+                <p style="color: var(--color-gray-600);">Educational facilities, community centers, and public buildings that serve as anchors for community growth and development.</p>
+            </div>
+            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
+                <h3 style="color: var(--color-black);">Sustainable Design</h3>
+                <p style="color: var(--color-gray-600);">Passive design strategies, renewable energy integration, and locally-sourced materials for environmentally responsible architecture.</p>
+            </div>
+            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
+                <h3 style="color: var(--color-black);">Renovation & Adaptive Reuse</h3>
+                <p style="color: var(--color-gray-600);">Transforming existing structures with modern interventions that respect historical context while meeting contemporary needs.</p>
+            </div>
+            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
+                <h3 style="color: var(--color-black);">Consultation Services</h3>
+                <p style="color: var(--color-gray-600);">Architectural guidance, feasibility studies, and design reviews for clients seeking expert input on their projects.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="projects">
         <h2>Featured Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-image">01</div>
                 <div class="project-info">
+                    <div class="project-meta">
+                        <span>Residential</span>
+                        <span>Nairobi, Kenya</span>
+                        <span>2023</span>
+                    </div>
                     <h3>The Riverside Residence</h3>
-                    <p class="project-meta">Residential | Nairobi, Kenya | 2023</p>
-                    <p>A contemporary family home that seamlessly blends indoor and outdoor living spaces. Designed with large openings to capture natural light and ventilation, the residence features locally sourced stone and timber, creating a warm, sustainable environment. The project demonstrates how modern design can honor traditional Kenyan craftsmanship.</p>
+                    <div class="project-section">
+                        <h4>Challenge</h4>
+                        <p>Design a contemporary family home on a sloped riverside site that maximizes natural light while maintaining privacy and security.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Approach</h4>
+                        <p>Created a terraced design following the natural topography. Large openings capture natural light and ventilation while strategically placed walls ensure privacy. Locally sourced stone and timber honor traditional Kenyan craftsmanship.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Outcome</h4>
+                        <p>A warm, sustainable home that seamlessly blends indoor and outdoor living spaces, demonstrating how modern design can honor tradition.</p>
+                    </div>
                 </div>
             </div>
             <div class="project-card">
                 <div class="project-image">02</div>
                 <div class="project-info">
+                    <div class="project-meta">
+                        <span>Commercial</span>
+                        <span>Thika, Kenya</span>
+                        <span>2022</span>
+                    </div>
                     <h3>Greenview Commercial Plaza</h3>
-                    <p class="project-meta">Commercial | Thika, Kenya | 2022</p>
-                    <p>A mixed-use development featuring retail spaces on the ground floor and offices above. The design prioritizes pedestrian experience with covered walkways and landscaped courtyards. Solar panels and rainwater harvesting systems reduce operational costs while supporting environmental sustainability.</p>
+                    <div class="project-section">
+                        <h4>Challenge</h4>
+                        <p>Develop a mixed-use space that balances retail and office needs while creating an inviting pedestrian experience.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Approach</h4>
+                        <p>Ground floor retail with covered walkways and landscaped courtyards. Upper office spaces with natural ventilation. Integrated solar panels and rainwater harvesting systems.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Outcome</h4>
+                        <p>A sustainable commercial development that reduces operational costs while prioritizing human experience and environmental responsibility.</p>
+                    </div>
                 </div>
             </div>
             <div class="project-card">
                 <div class="project-image">03</div>
                 <div class="project-info">
+                    <div class="project-meta">
+                        <span>Institutional</span>
+                        <span>Kisii, Kenya</span>
+                        <span>2021</span>
+                    </div>
                     <h3>Hope Primary School Extension</h3>
-                    <p class="project-meta">Institutional | Kisii, Kenya | 2021</p>
-                    <p>An expansion project for my hometown's primary school, adding four classrooms and a library. Working within a tight budget, we used local materials and community labor to create bright, well-ventilated learning spaces. The project proves that quality educational infrastructure doesn't require exorbitant budgets—just thoughtful design and community collaboration.</p>
+                    <div class="project-section">
+                        <h4>Challenge</h4>
+                        <p>Expand educational facilities within a limited budget while maintaining quality learning environments.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Approach</h4>
+                        <p>Collaborated with the community, using local materials and labor. Designed bright, well-ventilated classrooms with cross-ventilation and natural lighting to reduce energy costs.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Outcome</h4>
+                        <p>Four new classrooms and a library that prove quality educational infrastructure doesn't require exorbitant budgets—just thoughtful design and community collaboration.</p>
+                    </div>
                 </div>
             </div>
             <div class="project-card">
                 <div class="project-image">04</div>
                 <div class="project-info">
+                    <div class="project-meta">
+                        <span>Residential</span>
+                        <span>Nairobi, Kenya</span>
+                        <span>2023</span>
+                    </div>
                     <h3>Urban Loft Renovation</h3>
-                    <p class="project-meta">Residential | Nairobi, Kenya | 2023</p>
-                    <p>Transformation of a 1970s apartment into a modern urban loft. By removing non-structural walls and introducing mezzanine levels, we maximized vertical space in the compact unit. Industrial finishes pay homage to the building's original character while contemporary furnishings create a fresh, livable atmosphere.</p>
+                    <div class="project-section">
+                        <h4>Challenge</h4>
+                        <p>Transform a dated 1970s apartment into a modern urban loft while respecting the building's original character.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Approach</h4>
+                        <p>Removed non-structural walls and introduced mezzanine levels to maximize vertical space. Industrial finishes pay homage to the original structure while contemporary furnishings create freshness.</p>
+                    </div>
+                    <div class="project-section">
+                        <h4>Outcome</h4>
+                        <p>A compact yet spacious modern loft that demonstrates how thoughtful renovation can breathe new life into existing structures.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -574,26 +985,35 @@
                 <h3>Send a Message</h3>
                 <form id="contactForm">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message">Please enter your name</span>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message">Please enter a valid email</span>
                     </div>
                     <div class="form-group">
-                        <input type="tel" placeholder="Your Phone">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
                     </div>
                     <div class="form-group">
-                        <select required>
-                            <option value="">Project Type</option>
+                        <label for="projectType">Project Type *</label>
+                        <select id="projectType" name="projectType" required>
+                            <option value="">Select a project type</option>
                             <option value="residential">Residential</option>
                             <option value="commercial">Commercial</option>
                             <option value="institutional">Institutional</option>
                             <option value="consultation">Consultation</option>
                             <option value="other">Other</option>
                         </select>
+                        <span class="error-message">Please select a project type</span>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Tell me about your project..." rows="5" required></textarea>
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <span class="error-message">Please enter your message</span>
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
@@ -604,5 +1024,120 @@
     <footer>
         <p>&copy; 2024 Japhet Ondicho Akuma. All rights reserved. | Designing Africa's Future, One Project at a Time.</p>
     </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // CTA button smooth scroll
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const nav = document.querySelector('nav');
+            
+            if (currentScroll > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Form validation
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            const formGroups = this.querySelectorAll('.form-group');
+            
+            formGroups.forEach(group => {
+                const input = group.querySelector('input, select, textarea');
+                const errorMsg = group.querySelector('.error-message');
+                
+                if (input && input.hasAttribute('required')) {
+                    if (!input.value.trim()) {
+                        input.classList.add('error');
+                        if (errorMsg) errorMsg.classList.add('show');
+                        isValid = false;
+                    } else if (input.type === 'email' && !isValidEmail(input.value)) {
+                        input.classList.add('error');
+                        if (errorMsg) errorMsg.classList.add('show');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('error');
+                        if (errorMsg) errorMsg.classList.remove('show');
+                    }
+                }
+            });
+            
+            if (isValid) {
+                // Form is valid - would normally submit here
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+            }
+        });
+
+        // Email validation helper
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Clear error on input
+        contactForm.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorMsg = this.closest('.form-group').querySelector('.error-message');
+                if (errorMsg) errorMsg.classList.remove('show');
+            });
+        });
+    </script>
 </body>
 </html>
