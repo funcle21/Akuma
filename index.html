@@ -411,6 +411,24 @@
             font-size: var(--font-size-base);
         }
 
+        /* Expertise Section */
+        .expertise {
+            background: var(--color-white);
+        }
+
+        .expertise .philosophy-card {
+            background: var(--color-gray-100);
+            border-color: var(--color-gray-200);
+        }
+
+        .expertise .philosophy-card h3 {
+            color: var(--color-black);
+        }
+
+        .expertise .philosophy-card p {
+            color: var(--color-gray-600);
+        }
+
         /* Projects Section - Case Study Approach */
         .projects-grid {
             display: flex;
@@ -427,12 +445,12 @@
             background: var(--color-white);
         }
 
-        .project-card:nth-child(even) {
-            direction: rtl;
+        .project-card:nth-child(even) .project-image {
+            order: 2;
         }
 
-        .project-card:nth-child(even) > * {
-            direction: ltr;
+        .project-card:nth-child(even) .project-info {
+            order: 1;
         }
 
         .project-image {
@@ -647,6 +665,21 @@
             transform: none;
         }
 
+        /* Success Message */
+        .success-message {
+            padding: var(--space-lg);
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            margin-bottom: var(--space-lg);
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
         /* Footer */
         footer {
             background: var(--color-gray-900);
@@ -831,32 +864,32 @@
         </div>
     </section>
 
-    <section id="expertise">
+    <section id="expertise" class="expertise">
         <h2>Expertise & Services</h2>
         <div class="philosophy-grid">
-            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
-                <h3 style="color: var(--color-black);">Residential Architecture</h3>
-                <p style="color: var(--color-gray-600);">Custom homes and residential developments that balance aesthetic vision with practical living needs. From concept to completion, creating spaces that feel like home.</p>
+            <div class="philosophy-card">
+                <h3>Residential Architecture</h3>
+                <p>Custom homes and residential developments that balance aesthetic vision with practical living needs. From concept to completion, creating spaces that feel like home.</p>
             </div>
-            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
-                <h3 style="color: var(--color-black);">Commercial Design</h3>
-                <p style="color: var(--color-gray-600);">Office buildings, retail spaces, and mixed-use developments designed to enhance user experience while maximizing functionality and return on investment.</p>
+            <div class="philosophy-card">
+                <h3>Commercial Design</h3>
+                <p>Office buildings, retail spaces, and mixed-use developments designed to enhance user experience while maximizing functionality and return on investment.</p>
             </div>
-            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
-                <h3 style="color: var(--color-black);">Institutional Projects</h3>
-                <p style="color: var(--color-gray-600);">Educational facilities, community centers, and public buildings that serve as anchors for community growth and development.</p>
+            <div class="philosophy-card">
+                <h3>Institutional Projects</h3>
+                <p>Educational facilities, community centers, and public buildings that serve as anchors for community growth and development.</p>
             </div>
-            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
-                <h3 style="color: var(--color-black);">Sustainable Design</h3>
-                <p style="color: var(--color-gray-600);">Passive design strategies, renewable energy integration, and locally-sourced materials for environmentally responsible architecture.</p>
+            <div class="philosophy-card">
+                <h3>Sustainable Design</h3>
+                <p>Passive design strategies, renewable energy integration, and locally-sourced materials for environmentally responsible architecture.</p>
             </div>
-            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
-                <h3 style="color: var(--color-black);">Renovation & Adaptive Reuse</h3>
-                <p style="color: var(--color-gray-600);">Transforming existing structures with modern interventions that respect historical context while meeting contemporary needs.</p>
+            <div class="philosophy-card">
+                <h3>Renovation & Adaptive Reuse</h3>
+                <p>Transforming existing structures with modern interventions that respect historical context while meeting contemporary needs.</p>
             </div>
-            <div class="philosophy-card" style="background: var(--color-gray-100); border-color: var(--color-gray-200);">
-                <h3 style="color: var(--color-black);">Consultation Services</h3>
-                <p style="color: var(--color-gray-600);">Architectural guidance, feasibility studies, and design reviews for clients seeking expert input on their projects.</p>
+            <div class="philosophy-card">
+                <h3>Consultation Services</h3>
+                <p>Architectural guidance, feasibility studies, and design reviews for clients seeking expert input on their projects.</p>
             </div>
         </div>
     </section>
@@ -983,16 +1016,19 @@
             </div>
             <div class="contact-form-right">
                 <h3>Send a Message</h3>
+                <div class="success-message" id="successMessage">
+                    Thank you for your message! I will get back to you soon.
+                </div>
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Name *</label>
-                        <input type="text" id="name" name="name" required>
-                        <span class="error-message">Please enter your name</span>
+                        <input type="text" id="name" name="name" aria-describedby="name-error" required>
+                        <span class="error-message" id="name-error">Please enter your name</span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
-                        <span class="error-message">Please enter a valid email</span>
+                        <input type="email" id="email" name="email" aria-describedby="email-error" required>
+                        <span class="error-message" id="email-error">Please enter a valid email</span>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
@@ -1000,7 +1036,7 @@
                     </div>
                     <div class="form-group">
                         <label for="projectType">Project Type *</label>
-                        <select id="projectType" name="projectType" required>
+                        <select id="projectType" name="projectType" aria-describedby="projectType-error" required>
                             <option value="">Select a project type</option>
                             <option value="residential">Residential</option>
                             <option value="commercial">Commercial</option>
@@ -1008,12 +1044,12 @@
                             <option value="consultation">Consultation</option>
                             <option value="other">Other</option>
                         </select>
-                        <span class="error-message">Please select a project type</span>
+                        <span class="error-message" id="projectType-error">Please select a project type</span>
                     </div>
                     <div class="form-group">
                         <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                        <span class="error-message">Please enter your message</span>
+                        <textarea id="message" name="message" rows="5" aria-describedby="message-error" required></textarea>
+                        <span class="error-message" id="message-error">Please enter your message</span>
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
@@ -1118,9 +1154,18 @@
             });
             
             if (isValid) {
-                // Form is valid - would normally submit here
-                alert('Thank you for your message! I will get back to you soon.');
+                // Form is valid - show success message
+                const successMsg = document.getElementById('successMessage');
+                successMsg.classList.add('show');
                 contactForm.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 5000);
+                
+                // Scroll to success message
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         });
 
